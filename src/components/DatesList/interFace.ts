@@ -1,9 +1,6 @@
-interface RectangleData {
+export interface Person {
   id: number;
-  image: string;
   name: string;
   time: string;
-}
-export interface RectnagleProps {
-  rectangle: RectangleData[];
+  image: string;
 }
