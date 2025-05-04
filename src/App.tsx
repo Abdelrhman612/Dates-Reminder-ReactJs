@@ -1,26 +1,40 @@
 import { Container } from "react-bootstrap";
 import { Person } from "./data/data";
 import DatesCount from "./components/DatesCount/DatesCount";
-import Rectnagle from "./components/DatesList/DatesList";
 import Buttons from "./components/Buttons/Buttons";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./index.css";
+import DatesList from "./components/DatesList/DatesList";
 
 function App() {
+  // Initialize the state with the Person data
   const [personData, setPersonData] = useState(Person);
-  const OnDlelete = () => {
+
+  // Function to clear all person data
+  const handleDelete = () => {
     setPersonData([]);
   };
-  const OnVewData = () => {
+
+  // Function to reset person data to the original Person array
+  const handleViewData = () => {
     setPersonData(Person);
   };
+
+  // Clear person data when the component mounts
+  useEffect(() => {
+    setPersonData([]);
+  }, []);
+
   return (
     <>
-      <div className="font color-body ">
+      <div className="font color-body">
         <Container className="py-5">
+          {/* Display the count of person data */}
           <DatesCount datesCount={personData} />
-          <Rectnagle rectangle={personData} />
-          <Buttons deleteData={OnDlelete} onVewData={OnVewData} />
+          {/* Render the list of persons */}
+          <DatesList person={personData} />
+          {/* Render buttons for delete and reset actions */}
+          <Buttons deleteData={handleDelete} onVewData={handleViewData} />
         </Container>
       </div>
     </>
